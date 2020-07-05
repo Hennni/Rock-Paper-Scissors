@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 
 <html>
+    <body>
+        <button id="rockBtn">Rock</button>
+        <button id="paperBtn">Paper</button>
+        <button id="scissorsBtn">Scissors</button>
+        <div id = "result"></div>
+    </body>
 
     <script>
+        const rockBtn = document.getElementById("rockBtn");
+        rockBtn.onclick = function() {
+            let p = document.createElement("p")
+            let playerSelection = "rock";
+            let computerSelection = computerPlay();
+            let outcome = playRound(playerSelection, computerSelection);
+            p.innerHTML = outcome;
+            document.getElementById("result").appendChild(p);
+            };
+
 
         function computerPlay() {
             const rand = Math.random();
@@ -16,8 +32,11 @@
         }
         
         function playRound(playerSelection, computerSelection) {
+
             let player = playerSelection.toLowerCase();
             let computer = computerSelection;
+            
+
 
             if(player===computer) {
                 return "It's a tie!"
@@ -53,7 +72,6 @@
             
             while (i < amount) {
             let playerSelection = prompt("Please enter 'rock', 'paper', or 'scissors' to play");
-            let computerSelection = computerPlay();
             outcome = playRound(playerSelection, computerSelection);
             console.log(outcome);
             if (outcome === "You Win! Rock beats Scissors!" || outcome === "You Win! Paper beats Rock!" || outcome === "You Win! Scissors beats Paper!") scorePlayer++;
@@ -66,8 +84,6 @@
         }
     
     
-    console.log(game(5));
-
 
         
         
