@@ -10,15 +10,47 @@
 
     <script>
         const rockBtn = document.getElementById("rockBtn");
+        const paperBtn = document.getElementById("paperBtn");
+        const scissorsBtn = document.getElementById("scissorsBtn");
+        let scorePlayer = 0;
+        let scoreComputer = 0;
+        let amount = 5;
+        let i = 0;
+
         rockBtn.onclick = function() {
-            let p = document.createElement("p")
+            const p = document.createElement("p")
             let playerSelection = "rock";
             let computerSelection = computerPlay();
             let outcome = playRound(playerSelection, computerSelection);
+            scoreTracker(outcome);
             p.innerHTML = outcome;
             document.getElementById("result").appendChild(p);
-            };
+            endGame();
+        };
+        
+        paperBtn.onclick = function() {
+            const p = document.createElement("p")
+            let playerSelection = "paper";
+            let computerSelection = computerPlay();
+            let outcome = playRound(playerSelection, computerSelection);
+            scoreTracker(outcome);
+            p.innerHTML = outcome;
+            document.getElementById("result").appendChild(p);
+            endGame();
+        };
+        
+        scissorsBtn.onclick = function() {
+            const p = document.createElement("p")
+            let playerSelection = "scissors";
+            let computerSelection = computerPlay();
+            let outcome = playRound(playerSelection, computerSelection);
+            scoreTracker(outcome);
+            p.innerHTML = outcome;
+            document.getElementById("result").appendChild(p);
+            endGame();
+        };
 
+    
 
         function computerPlay() {
             const rand = Math.random();
@@ -35,8 +67,6 @@
 
             let player = playerSelection.toLowerCase();
             let computer = computerSelection;
-            
-
 
             if(player===computer) {
                 return "It's a tie!"
@@ -64,23 +94,27 @@
             }
         }
 
-        function game(amount){
-            let scorePlayer = 0;
-            let scoreComputer = 0;
-            let i = 0;
-            let outcome;
-            
-            while (i < amount) {
-            let playerSelection = prompt("Please enter 'rock', 'paper', or 'scissors' to play");
-            outcome = playRound(playerSelection, computerSelection);
-            console.log(outcome);
+        function scoreTracker(outcome) {
             if (outcome === "You Win! Rock beats Scissors!" || outcome === "You Win! Paper beats Rock!" || outcome === "You Win! Scissors beats Paper!") scorePlayer++;
             else if (outcome === "You Lose! Paper beats Rock!" || outcome === "You Lose! Scissors beats Paper!" || outcome === "You Lose! Rock Beats Scissors!") scoreComputer++;
-            i++;
         }
-            if(scorePlayer > scoreComputer) return "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You're the winner!";
-            else if (scoreComputer > scorePlayer) return "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You lost!";
-            else return "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // It's a tie!";
+
+        function endGame() {
+            const p = document.createElement("p")
+            if(scorePlayer === 5) { 
+                p.innerHTML = "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You're the winner!";
+                document.getElementById("result").appendChild(p);
+                rockBtn.remove();
+                paperBtn.remove();
+                scissorsBtn.remove();
+            }
+            else if (scoreComputer === 5) { 
+                p.innerHTML = "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You lost!";
+                document.getElementById("result").appendChild(p);
+                rockBtn.remove();
+                paperBtn.remove();
+                scissorsBtn.remove();
+            }
         }
     
     
