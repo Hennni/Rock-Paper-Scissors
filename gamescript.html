@@ -14,8 +14,8 @@
         const scissorsBtn = document.getElementById("scissorsBtn");
         let scorePlayer = 0;
         let scoreComputer = 0;
-        let amount = 5;
-        let i = 0;
+        const userInput = prompt("Best of?");
+        const amount = parseInt(userInput);
 
         rockBtn.onclick = function() {
             const p = document.createElement("p")
@@ -25,7 +25,9 @@
             scoreTracker(outcome);
             p.innerHTML = outcome;
             document.getElementById("result").appendChild(p);
-            endGame();
+            if (scorePlayer + scoreComputer === amount) {
+                endGame();
+            }
         };
         
         paperBtn.onclick = function() {
@@ -36,7 +38,9 @@
             scoreTracker(outcome);
             p.innerHTML = outcome;
             document.getElementById("result").appendChild(p);
-            endGame();
+            if (scorePlayer + scoreComputer === amount) {
+                endGame();
+            }
         };
         
         scissorsBtn.onclick = function() {
@@ -47,10 +51,10 @@
             scoreTracker(outcome);
             p.innerHTML = outcome;
             document.getElementById("result").appendChild(p);
-            endGame();
+            if (scorePlayer + scoreComputer === amount) {
+                endGame();
+            }
         };
-
-    
 
         function computerPlay() {
             const rand = Math.random();
@@ -65,7 +69,7 @@
         
         function playRound(playerSelection, computerSelection) {
 
-            let player = playerSelection.toLowerCase();
+            let player = playerSelection;
             let computer = computerSelection;
 
             if(player===computer) {
@@ -101,14 +105,14 @@
 
         function endGame() {
             const p = document.createElement("p")
-            if(scorePlayer === 5) { 
+            if(scorePlayer > scoreComputer) { 
                 p.innerHTML = "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You're the winner!";
                 document.getElementById("result").appendChild(p);
                 rockBtn.remove();
                 paperBtn.remove();
                 scissorsBtn.remove();
             }
-            else if (scoreComputer === 5) { 
+            else if (scoreComputer > scorePlayer) { 
                 p.innerHTML = "Final Score: " + scorePlayer + " (user) " + " vs. " + scoreComputer + " (computer) // You lost!";
                 document.getElementById("result").appendChild(p);
                 rockBtn.remove();
